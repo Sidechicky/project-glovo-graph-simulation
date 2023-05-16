@@ -3,12 +3,11 @@ import { MongoClient } from 'mongodb';
 
 const COLLECTION_EDGES = 'relations';
 const COLLECTION_COORDINATES = 'coordinates'; 
-const CONNECTION_STRING = process.env.MONGODB_URL;
-
-console.log(CONNECTION_STRING);
+let connection_string;
 
 export async function initialise() {
-    const client = new MongoClient(CONNECTION_STRING);
+    connection_string = process.env.MONGODB_URL
+    const client = new MongoClient(connection_string);
 
     await client.connect();
 

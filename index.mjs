@@ -1,9 +1,13 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+import express from 'express';
+
 import { prerender } from './cola_prerender.mjs';
 import { initialise, find_all, insert_many } from './database_handler.mjs';
-import express from 'express';
-import * as dotenv from 'dotenv';
 
-dotenv.config();
+
+
+
 
 const app = express();
 const PORT = 10000; 
