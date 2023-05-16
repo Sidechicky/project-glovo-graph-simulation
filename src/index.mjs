@@ -16,7 +16,7 @@ app.get('/', async (req, res) => {
     const new_database_name = req.query.newDatabaseName;
 
     const edges = await find_all(database_client, prev_database_name);
-    const coordinates = await prerender(edges, 6000);
+    const coordinates = await prerender(edges);
 
     insert_many(database_client, new_database_name, coordinates);
 
