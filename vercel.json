@@ -1,0 +1,10 @@
+{
+    "framework": null,
+    "installCommand": "npm install",
+    "builds": [
+        {
+            "src": "src/index.mjs",
+            "use": "@vercel/node"
+        }
+    ]
+}
