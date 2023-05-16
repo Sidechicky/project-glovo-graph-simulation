@@ -6,9 +6,6 @@ import { prerender } from './cola_prerender.mjs';
 import { initialise, find_all, insert_many } from './database_handler.mjs';
 
 
-
-
-
 const app = express();
 const PORT = 10000; 
 
@@ -16,6 +13,7 @@ const PORT = 10000;
 let database_client = await initialise();
 
 app.get('/', async (req, res) => {
+    console.log('GET request');
     const prev_database_name = req.query.prevDatabaseName;
     const new_database_name = req.query.newDatabaseName;
 
@@ -29,4 +27,6 @@ app.get('/', async (req, res) => {
     res.status(200).send(coordinates);
 });
 
-app.listen(PORT);
+app.listen(PORT, ()=>{
+    console.log('listening on port')
+});

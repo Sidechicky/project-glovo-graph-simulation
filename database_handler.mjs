@@ -7,6 +7,7 @@ let connection_string;
 
 export async function initialise() {
     connection_string = process.env.MONGODB_URL
+    console.log('Connection string', connection_string);
     const client = new MongoClient(connection_string);
 
     await client.connect();
