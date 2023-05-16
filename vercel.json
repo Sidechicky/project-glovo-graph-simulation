@@ -3,8 +3,14 @@
     "installCommand": "npm install",
     "builds": [
         {
-            "src": "src/index.mjs",
+            "src": "index.mjs",
             "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/"
         }
     ]
 }
