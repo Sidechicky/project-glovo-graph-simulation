@@ -8,11 +8,10 @@ dotenv.config();
 const app = express();
 const PORT = 10000; 
 
-let database_client;
+// for serverless (Cyclic), connections should be established before listening
+let database_client = await initialise();
 
 app.get('/', async (req, res) => {
-    if (!database_client) database_client = await initialise();
-
     const prev_database_name = req.query.prevDatabaseName;
     const new_database_name = req.query.newDatabaseName;
 
