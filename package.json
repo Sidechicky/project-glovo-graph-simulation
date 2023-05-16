@@ -2,7 +2,7 @@
   "name": "project-glovo-headless-graph-simulation",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
     "start": "node --experimental-modules index.mjs"
   },
