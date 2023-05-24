@@ -17,7 +17,7 @@ app.get('/', async (req, res) => {
     console.log('GET request');
     const prev_database_name = req.query.prev;
     const new_database_name = req.query.new;
-    const webhook_url = req.query.webhook;
+    const webhook = req.query.webhook;
 
     console.log(prev_database_name, new_database_name);
 
