@@ -12,10 +12,12 @@ const PORT = 10000;
 // for serverless (Cyclic), connections should be established before listening
 let database_client = await initialise();
 
+
 app.get('/', async (req, res) => {
     console.log('GET request');
-    const prev_database_name = req.query.prevDatabaseName;
-    const new_database_name = req.query.newDatabaseName;
+    const prev_database_name = req.query.prev;
+    const new_database_name = req.query.new;
+    const webhook_url = req.query.webhook;
 
     console.log(prev_database_name, new_database_name);
 
@@ -24,7 +26,10 @@ app.get('/', async (req, res) => {
 
     insert_many(database_client, new_database_name, coordinates);
 
-    res.status(200).send(coordinates);
+    // send to webhook to coordinate the change to new set of data
+    await fetch(webhook);
+
+    res.status(200).send('success');
 });
 
 app.listen(PORT, ()=>{
