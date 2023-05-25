@@ -32,3 +32,9 @@ export async function insert_many(client, database_name, docs) {
         .collection(COLLECTION_COORDINATES)
         .insertMany(docs);
 }
+
+export async function drop_collection(client, database_name) {
+    await client
+        .db(database_name)
+        .drop_collection(COLLECTION_COORDINATES);
+}
