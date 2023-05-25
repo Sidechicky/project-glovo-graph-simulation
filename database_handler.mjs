@@ -34,14 +34,12 @@ export async function insert_many(client, database_name, docs) {
 }
 
 export async function drop_collection(client, database_name) {
-    if (!client
-        .db(database_name)
-        .listCollections()
-        .toArray()
-        .includes(COLLECTION_COORDINATES)) return;
-
-    await client
-        .db(database_name)
-        .collection(COLLECTION_COORDINATES)
-        .drop();
+    try {
+        await client
+            .db(database_name)
+            .collection(COLLECTION_COORDINATES)
+            .drop();
+    } catch (error) {
+        console.log('Collection doesn\'t exist');
+    }
 }
