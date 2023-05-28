@@ -7,6 +7,7 @@ import { setTimeout } from 'timers/promises';
 const RADIUS = 10;
 
 const simulate = (nodes, edges) => {
+    console.log('Simulating ...');
     return cola.d3adaptor(d3)
         .nodes(nodes)
         .links(edges)
@@ -18,6 +19,7 @@ const simulate = (nodes, edges) => {
 
 export async function prerender(db_edges, timeout = 120000) {
     const transform = ({ nodes, edges }) => {
+        console.log('Transforming ...');
         // only necessary for cola to compute bounding boxes
         const nodes2 = _.chain(nodes)
             .map(p => ({...p, width: RADIUS * p.name.length, height: RADIUS * 2.5}))
