@@ -25,6 +25,7 @@ async function start_process(
         insert_many(database_client, rendered_database_name, coordinates);
 
         // send to webhook to coordinate the change to new set of data
+        console.log('Calling webhook: ' + webhook);
         fetch(webhook);
     }
 }
@@ -38,7 +39,7 @@ app.get('/', async (req, res) => {
     console.log('RENDERED DB:', rendered_database_name)
     console.log('WEBHOOK:', webhook);
 
-    start_process(
+    await start_process(
         raw_database_name, 
         rendered_database_name, 
         webhook
