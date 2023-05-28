@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb';
 
 
-const COLLECTION_EDGES = 'relations';
+const COLLECTION_EDGES = '_relations';
 const COLLECTION_COORDINATES = 'coordinates'; 
 let connection_string;
 
