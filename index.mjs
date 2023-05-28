@@ -12,17 +12,11 @@ const PORT = 10000;
 // for serverless (Cyclic), connections should be established before listening
 let database_client = await initialise();
 
-app.get('/', async (req, res) => {
-    const raw_database_name = req.query.dbraw;
-    const rendered_database_name = req.query.dbrendered;
-    const webhook = req.query.webhook;
-
-    console.log('RAW DB:', raw_database_name)
-    console.log('RENDERED DB:', rendered_database_name)
-    console.log('WEBHOOK:', webhook);
-
-    res.status(200).send('success');
-
+async function start_process(
+    raw_database_name, 
+    rendered_database_name,
+    webhook
+) {
     if (raw_database_name && rendered_database_name && webhook) {
         const edges = await find_all(database_client, raw_database_name);
         const coordinates = await prerender(edges);
@@ -33,6 +27,23 @@ app.get('/', async (req, res) => {
         // send to webhook to coordinate the change to new set of data
         fetch(webhook);
     }
+}
+
+app.get('/', async (req, res) => {
+    const raw_database_name = req.query.dbraw;
+    const rendered_database_name = req.query.dbrendered;
+    const webhook = req.query.webhook;
+
+    console.log('RAW DB:', raw_database_name)
+    console.log('RENDERED DB:', rendered_database_name)
+    console.log('WEBHOOK:', webhook);
+
+    start_process(
+        raw_database_name, 
+        rendered_database_name, 
+        webhook
+    );
+    res.status(200).send('success');
 });
 
 app.listen(PORT, '0.0.0.0', ()=>{
